@@ -9,9 +9,11 @@ const AppProvider = (props : IChildren) => {
   const [image, setImage] = useState<any>(defaultState);
 
   const setNewImage = useCallback((newImg: string) : void => {
-    postImage('').then(({summary}) => {
-      setImage({image: newImg, isValid: summary.outcome === 'Approved'})
-    })
+    if(newImg) {
+      postImage(newImg).then(({summary}) => {
+        setImage({image: newImg, isValid: summary.outcome === 'Approved'})
+      })
+    }
   }, [setImage])
 
   return (
