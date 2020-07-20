@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react'
-import { ContextData, defaultState, defaultValue, IChildren, Data } from './interfaces'
+import { ContextData, defaultState, defaultValue, IChildren } from './interfaces'
 
 export const AppContext = React.createContext<ContextData>(defaultValue);
 const { Provider } = AppContext;

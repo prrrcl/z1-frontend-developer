@@ -4,7 +4,7 @@ export const defaultValue: ContextData = {
   image: '',
   setNewImage: () => null
 }
-export const defaultState: Data = {
+export const defaultState: IImageContext = {
   image: '',
   isValid: null
 }
@@ -13,9 +13,9 @@ export interface ContextData {
   setNewImage: Function
 }
 
-export interface Data {
+export interface IImageContext {
   image: string,
-  isValid: boolean | null
+  isValid?: boolean | null
 }
 export interface IChildren {
   children: ReactChild | ReactChildren
