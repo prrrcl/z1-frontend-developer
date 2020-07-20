@@ -4,6 +4,7 @@ import styled from '@emotion/styled'
 import Header from 'app/components/header'
 import useApp from 'shared/customHooks/useApp'
 import CardTakePicture from 'app/components/cardTakePicture'
+import { IImageContext } from 'shared/context/app/interfaces'
 
 const Section = styled.section`
   padding: 20px;
@@ -21,7 +22,7 @@ const Section = styled.section`
   }
 `
 const Home = () => {
-  const { image } = useApp();
+  const { image }: any = useApp();
   console.log(image)
 
   return (
@@ -30,7 +31,10 @@ const Home = () => {
       <Section>
         <h2>Scan your ID</h2>
         <p>Take a picture. It may take time to validate your personal information</p>
-        <CardTakePicture />
+        {image && image.image 
+        ? <CardTakePicture image={image} />
+        : <CardTakePicture />
+        }
       </Section>
     </>
   )

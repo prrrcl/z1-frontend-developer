@@ -1,11 +1,14 @@
+/** @jsx jsx */
 import React from 'react'
+import { jsx } from '@emotion/core'
 import styled from '@emotion/styled'
 import { colors } from 'app/styles'
 
 interface ButtonProps {
   children: React.ReactNode,
   onClick: (event: React.MouseEvent<HTMLButtonElement>) => void
-  style?: Object
+  style?: Object,
+  css?: any
 }
 
 const CustomButton = styled.button`
@@ -25,7 +28,7 @@ const Button = (props: ButtonProps) => {
   const { children, onClick, style } = props;
 
   return (
-    <CustomButton onClick={onClick} style={style}>
+    <CustomButton onClick={onClick} style={style} css={props.css}>
       {children}
     </CustomButton>
   )
