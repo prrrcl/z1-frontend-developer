@@ -1,10 +1,12 @@
 /** @jsx jsx */
-import { useRef, useLayoutEffect } from 'react'
+import { useRef, useLayoutEffect, useEffect } from 'react'
 import styled from '@emotion/styled'
 import { css, jsx } from '@emotion/core'
-import useApp from 'shared/customHooks/useApp'
 import Webcam from 'react-webcam'
 import useLocation from 'wouter/use-location'
+import useApp from 'shared/customHooks/useApp'
+import { colors } from 'app/styles'
+import { ReactComponent as PictureTakenIcon } from 'assets/pictureTaken.svg'
 
 const CancelButton = styled.button`
 position: absolute;
@@ -55,19 +57,21 @@ const ScannerWrapper = styled.section`
   p {
     font-size: 16px;
     &:last-of-type{
-      margin-bottom: 16px;
+      margin-bottom: 56px;
     }
   }
 `
-
-const scannerStyle = css`
-  width: 100%;
-  border-radius: 20px;
-`;
 const Scanner = () => {
   const { image, setNewImage }: any = useApp();
   const [location, setLocation] = useLocation();
   const video = useRef<any>()
+
+  const scannerStyle = css`
+    width: 100%;
+    border-radius: 20px;
+    border: 2px solid ${!image.isValid && image.image ? colors.red : !image.image ? 'transparent' : colors.green};
+    margin-bottom: 15px;
+  `;
 
   useLayoutEffect(() => {
     const request = setInterval(() => {
@@ -82,6 +86,11 @@ const Scanner = () => {
     return () => clearInterval(request)
   }, [image.image, image.isValid, setNewImage])
 
+  useEffect(() => {
+    if (image.isValid) {
+      setTimeout(()=> setLocation('/'), 2500)
+    }
+  }, [image.isValid, setLocation])
 
   return (
     <ScannerWrapper>
@@ -93,7 +102,20 @@ const Scanner = () => {
         ref={video}
         screenshotFormat="image/jpeg"
       />
-      <CancelButton onClick={() => setLocation('/')}>Cancel</CancelButton>
+      {image.isValid && (
+        <div 
+          css={css`
+            display: flex;
+            align-items: center;
+            margin-top: 15px;
+            `}>
+            <PictureTakenIcon/>
+            <span>Picture taken!</span>
+        </div>
+        )}
+        {!image.isValid &&
+          <CancelButton onClick={() => setLocation('/')}>Cancel</CancelButton>
+        }
     </ScannerWrapper>
   )
 }

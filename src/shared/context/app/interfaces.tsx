@@ -2,7 +2,8 @@ import { ReactChild, ReactChildren } from 'react'
 
 export const defaultValue: ContextData = {
   image: '',
-  setNewImage: () => null
+  setNewImage: () => null,
+  setImage: () => null,
 }
 export const defaultState: IImageContext = {
   image: '',
@@ -10,7 +11,8 @@ export const defaultState: IImageContext = {
 }
 export interface ContextData {
   image: string,
-  setNewImage: Function
+  setNewImage: Function,
+  setImage: Function
 }
 
 export interface IImageContext {

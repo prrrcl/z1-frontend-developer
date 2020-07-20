@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import styled from '@emotion/styled'
 import { css } from '@emotion/core'
 import { useLocation } from 'wouter'
@@ -6,6 +6,8 @@ import { ReactComponent as CardPlaceholderInfo } from 'assets/idCard.svg'
 import Button from './button'
 import Status from './status'
 import { IImageContext } from 'shared/context/app/interfaces'
+import useApp from 'shared/customHooks/useApp'
+import { colors } from 'app/styles'
 
 const Card = styled.article`
   box-shadow: 0 10px 20px -6px rgba(0,0,0,0.15);
@@ -33,12 +35,18 @@ interface IImageProps {
 }
 const CardTakePicture = (props: React.PropsWithChildren<IImageProps>) => {
   const [location, setLocation] = useLocation();
+  const { setImage } = useApp();
+
+  const handleRetake = useCallback(() => {
+    setImage({ image: null, isValid: null})
+    setLocation('/scanner')
+  }, [setImage, setLocation])
 
   if(props.image) {
     return (
       <Card>
         {!props.image.isValid &&
-          <Button onClick={() => setLocation('/scanner')} css={buttonRetake}>
+          <Button onClick={handleRetake} css={buttonRetake}>
             Retake picture
           </Button>
         }
@@ -46,7 +54,7 @@ const CardTakePicture = (props: React.PropsWithChildren<IImageProps>) => {
           src={props.image.image}
           alt={''} 
           style={{ 
-            borderColor: props.image.isValid ? '#69CC8B' : '#C00000'
+            borderColor: props.image.isValid ? colors.green : colors.red
           }} />
         <Status isValid={props.image.isValid} />
       </Card>

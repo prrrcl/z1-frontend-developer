@@ -4,6 +4,7 @@ import styled from '@emotion/styled'
 import { css, jsx } from '@emotion/core'
 import { ReactComponent as OkIcon } from 'assets/okIcon.svg'
 import { ReactComponent as CloseIcon } from 'assets/closeIcon.svg'
+import { colors } from 'app/styles'
 
 interface IStatus {
   isValid: boolean | null | undefined
@@ -23,10 +24,10 @@ const StatusWrapper = styled.div`
   }
 `
 const okStyle = css`
-  background: #69CC8B;
+  background: ${colors.green};
 `
 const wrongStyle = css`
-  background: #C00000;
+  background: ${colors.red};
 `
 
 

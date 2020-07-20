@@ -21,6 +21,7 @@ const AppProvider = (props : IChildren) => {
       value={
         { 
           image, 
+          setImage,
           setNewImage 
         }
       }>
