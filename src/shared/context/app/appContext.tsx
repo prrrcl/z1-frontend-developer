@@ -1,18 +1,12 @@
-import React, { useState, useCallback, ReactChild, ReactChildren } from 'react'
+import React, { useState, useCallback } from 'react'
+import { ContextData, defaultState, defaultValue, IChildren, Data } from './interfaces'
 
-export const AppContext = React.createContext({});
+export const AppContext = React.createContext<ContextData>(defaultValue);
 const { Provider } = AppContext;
 
-type Data = {
-  image: string,
-  isValid: boolean
-}
-type propsType = {
-  children: ReactChild | ReactChildren
-}
+const AppProvider = (props : IChildren) => {
+  const [image, setImage] = useState<any>(defaultState);
 
-const AppProvider = (props : propsType) => {
-  const [image, setImage] = useState<Data | null>(null);
   const setNewImage = useCallback((newImg: string) : void => {
     // TODO: fetch
     const value = { image: newImg, isValid: true }
