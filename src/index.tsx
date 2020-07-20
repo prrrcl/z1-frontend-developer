@@ -1,14 +1,20 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
-import AppProvider from './shared/context/appContext';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Switch, Route } from 'wouter'
+import AppProvider from 'shared/context/appContext'
+import * as serviceWorker from './serviceWorker'
+import Home from 'app/pages/home'
 
 ReactDOM.render(
   <React.StrictMode>
     <AppProvider>
-      <App/>
+      <Switch>
+        {/* TODO: make private routes */}
+        <Route path="/">
+          <Home />
+        </Route>
+
+      </Switch>
     </AppProvider>
   </React.StrictMode>,
   document.getElementById('root')
