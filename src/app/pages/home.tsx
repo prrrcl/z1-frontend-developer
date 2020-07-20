@@ -4,7 +4,6 @@ import styled from '@emotion/styled'
 import Header from 'app/components/header'
 import useApp from 'shared/customHooks/useApp'
 import CardTakePicture from 'app/components/cardTakePicture'
-import { IImageContext } from 'shared/context/app/interfaces'
 
 const Section = styled.section`
   padding: 20px;
@@ -21,9 +20,9 @@ const Section = styled.section`
     margin-bottom: 27px;
   }
 `
+
 const Home = () => {
   const { image }: any = useApp();
-  console.log(image)
 
   return (
     <>

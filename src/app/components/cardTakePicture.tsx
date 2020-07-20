@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import { css } from '@emotion/core'
+import { useLocation } from 'wouter'
 import { ReactComponent as CardPlaceholderInfo } from 'assets/idCard.svg'
 import Button from './button'
 import Status from './status'
@@ -31,11 +32,13 @@ interface IImageProps {
   image?: IImageContext
 }
 const CardTakePicture = (props: React.PropsWithChildren<IImageProps>) => {
+  const [location, setLocation] = useLocation();
+
   if(props.image) {
     return (
       <Card>
         {!props.image.isValid &&
-          <Button onClick={() => null} css={buttonRetake}>
+          <Button onClick={() => setLocation('/scanner')} css={buttonRetake}>
             Retake picture
           </Button>
         }
@@ -53,7 +56,7 @@ const CardTakePicture = (props: React.PropsWithChildren<IImageProps>) => {
     <Card style={{ padding: '20px'}}>
       <CardPlaceholderInfo />
       <Button 
-        onClick={() => null} 
+        onClick={() => setLocation('/scanner')} 
         style={{
           position: 'absolute',
           top: '50%',
