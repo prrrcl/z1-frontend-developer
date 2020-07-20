@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react'
 import { ContextData, defaultState, defaultValue, IChildren } from './interfaces'
+import { postImage } from 'shared/services/appService';
 
 export const AppContext = React.createContext<ContextData>(defaultValue);
 const { Provider } = AppContext;
@@ -8,9 +9,9 @@ const AppProvider = (props : IChildren) => {
   const [image, setImage] = useState<any>(defaultState);
 
   const setNewImage = useCallback((newImg: string) : void => {
-    // TODO: fetch
-    const value = { image: newImg, isValid: true }
-    setImage(value)
+    postImage('').then(({summary}) => {
+      setImage({image: newImg, isValid: summary.outcome === 'Approved'})
+    })
   }, [setImage])
 
   return (
