@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button [Props] Check props 1`] = `
+Object {
+  "0": "B",
+  "1": "u",
+  "2": "t",
+  "3": "t",
+  "4": "o",
+  "5": "n",
+}
+`;
+
+exports[`Button [Render] Button with Props 1`] = `
+<button
+  className="css-al3l4-Button"
+  onClick={[Function]}
+>
+  Button
+</button>
+`;
+
+exports[`Button [Render] Button without props 1`] = `
+<button
+  className="css-al3l4-Button"
+  onClick={[Function]}
+>
+  Button
+</button>
+`;

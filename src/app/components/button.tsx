@@ -34,4 +34,9 @@ const Button = (props: ButtonProps) => {
   )
 }
 
+Button.defaultProps = {
+  children: "Button",
+  onClick: () => null,
+}
+
 export default Button
